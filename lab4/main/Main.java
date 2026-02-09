@@ -3,7 +3,9 @@ package main;
 import model.Student;
 import service.StudentService;
 
-    public class Main {
+import java.util.Scanner;
+
+public class Main {
         public static void main(String[] args) {
 
             //8  Объектінің құрылуы
@@ -24,7 +26,42 @@ import service.StudentService;
             StudentService service = new StudentService();
             service.printStudent(s1);
             //8 Бағдарлама аяқталған соң объектілер жойылады
+
+            Scanner scanner = new Scanner(System.in);
+
+            // NAME енгізу
+            System.out.print("Атыңызды енгізіңіз: ");
+            String name = scanner.nextLine();
+
+            if (name.matches(".*\\d.*")) {
+                System.out.println("Қате! Аты тек әріптерден тұруы керек.");
+                return;
+            }
+
+            // AGE енгізу
+            int age;
+            try {
+                System.out.print("Жасыңызды енгізіңіз: ");
+                age = scanner.nextInt();
+            } catch (Exception e) {
+                System.out.println("Қате! Жас тек сан болуы керек.");
+                return;
+            }
+
+            // 2008 шарты
+            int birthYear = 2026 - age;
+
+            if (birthYear > 2008) {
+                System.out.println("Сіз әлі студент емессіз");
+                return;
+            }
+
+            // Барлығы дұрыс болса — объект құрамыз
+            Student student = new Student(name, age, "Information Systems");
+            student.showInfo();
         }
-    }
+}
+
+
 
 
